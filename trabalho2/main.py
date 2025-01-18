@@ -1,10 +1,15 @@
 import numpy as np
 from luus_jaakola import luusJaakola
+from evolucao_diferencial import evolucaoDiferencial
 from temperaturaMedia import fObj
 
 x, fx = luusJaakola(fObj, [(750, 1000)], 0.01, 200, 200)
 
-print(f"fObj({x[0]}): {fx}")
+print(f"Luus Jaakola -> fObj({x[0]}): {fx}")
+
+x, fx = evolucaoDiferencial(fObj, (750, 1000), 50, 500, 1.3, 0.7)
+
+print(f"Evolução Diferencial -> fObj({x}): {fx}")
 
 
 # def fObjLuusJaakola(params):
