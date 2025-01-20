@@ -47,7 +47,6 @@ def evolucaoDiferencial(fObj, bounds, nPop=20, nGen=1000, F=0.8, CR=0.7):
         if (results[bestI] < oldBestFx):
             print(f"Gen: {gen + 1} | Best x: {pop[bestI]} | Best F(x): {results[bestI]}")
 
-    # Retorna o melhor indivíduo encontrado
     bestI = np.argmin(results)
     bestX = pop[bestI]
     bestFx = results[bestI]
