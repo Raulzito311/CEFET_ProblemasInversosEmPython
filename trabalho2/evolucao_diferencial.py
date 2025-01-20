@@ -1,10 +1,13 @@
 import numpy as np
 
-# Configurações do algoritmo de Evolução Diferencial
 def evolucaoDiferencial(fObj, bounds, nPop=20, genCount=1000, F=0.8, CR=0.7):
     min, max = bounds
     pop = np.random.uniform(min, max, nPop)
     results = np.array([fObj([x]) for x in pop])
+
+    bestI = np.argmin(results)
+
+    print(f"Inicio | Best x: {pop[bestI]} | Best F(x): {results[bestI]}")
     
     for gen in range(genCount):
         trialPop = np.copy(pop)
@@ -32,19 +35,17 @@ def evolucaoDiferencial(fObj, bounds, nPop=20, genCount=1000, F=0.8, CR=0.7):
         # Selection
         trialResults = np.array([fObj([x]) for x in trialPop])
 
-        # if (np.average(trialResults) < np.average(results)):
-        #     pop = trialPop
-        #     results = trialResults
+        oldBestFx = results[np.argmin(results)]
 
         for i in range(nPop):
             if (trialResults[i] < results[i]):
                 pop[i] = trialPop[i]
                 results[i] = trialResults[i]
-
+        
         bestI = np.argmin(results)
-        bestX = pop[bestI]
-        bestFx = results[bestI]
-        print(f"Gen: {gen} | Best x: {bestX} | Best F(x): {bestFx}")
+
+        if (results[bestI] < oldBestFx):
+            print(f"Gen: {gen + 1} | Best x: {pop[bestI]} | Best F(x): {results[bestI]}")
 
     # Retorna o melhor indivíduo encontrado
     bestI = np.argmin(results)

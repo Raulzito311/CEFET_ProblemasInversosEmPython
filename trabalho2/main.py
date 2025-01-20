@@ -3,26 +3,22 @@ from luus_jaakola import luusJaakola
 from evolucao_diferencial import evolucaoDiferencial
 from temperaturaMedia import fObj
 
-x, fx = luusJaakola(fObj, [(750, 1000)], 0.01, 200, 200)
+nInt=100
+nOut=100
+coef=0.2
 
-print(f"Luus Jaakola -> fObj({x[0]}): {fx}")
+x1, fx1 = luusJaakola(fObj, [(750, 1000)], coef, nInt, nOut)
 
-x, fx = evolucaoDiferencial(fObj, (750, 1000), 50, 500, 1.3, 0.7)
+print(f"coef={coef} | nInt={nInt} | nOut={nOut}")
+print(f"Luus Jaakola -> fObj({x1[0]}): {fx1}")
 
-print(f"Evolução Diferencial -> fObj({x}): {fx}")
 
+nPop=10
+nGen=100
+F=0.25
+CR=0.1
 
-# def fObjLuusJaakola(params):
-#     params[1] = int(params[1])
-#     params[2] = int(params[2])
-#     print(f"luusJaakola(coef={params[0]}, nInt={params[1]}, nOut={params[2]})")
-#     x, fx = luusJaakola(fObj, [(750, 1000)], params[0], params[1], params[2])
+x2, fx2 = evolucaoDiferencial(fObj, (750, 1000), nPop, nGen, F, CR)
 
-#     print(f"fObj({x[0]}): {fx}")
-#     print("-----------------------------------------------")
-
-#     return fx
-
-# x, fx = luusJaakola(fObjLuusJaakola, [(0.001, 0.3), (10, 300), (10, 300)], 0.01, 5, 5)
-
-# print(f"fObjLuusJaakola({x}): {fx}")
+print(f"nPop={nPop} | nGen={nGen} | F={F} | CR={CR}")
+print(f"Evolução Diferencial -> fObj({x2}): {fx2}")

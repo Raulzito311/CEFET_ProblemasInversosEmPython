@@ -7,9 +7,6 @@ def luusJaakola(func, bounds, coef = 0.01, nInt = 100, nOut = 100):
 
     x = np.array([np.random.uniform(low, high) for low, high in bounds])
 
-    print(f"x: {x}")
-    print(f"stepSize: {stepSize}")
-
     fx = func(x)
 
     for i in range(int(nOut)):
@@ -30,3 +27,4 @@ def luusJaakola(func, bounds, coef = 0.01, nInt = 100, nOut = 100):
             return x, fx
     
     return x, fx
+
