@@ -1,4 +1,3 @@
-import numpy as np
 from luus_jaakola import luusJaakola
 from evolucao_diferencial import evolucaoDiferencial
 from temperaturaMedia import fObj
