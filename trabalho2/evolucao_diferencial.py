@@ -1,6 +1,6 @@
 import numpy as np
 
-def evolucaoDiferencial(fObj, bounds, nPop=20, genCount=1000, F=0.8, CR=0.7):
+def evolucaoDiferencial(fObj, bounds, nPop=20, nGen=1000, F=0.8, CR=0.7):
     min, max = bounds
     pop = np.random.uniform(min, max, nPop)
     results = np.array([fObj([x]) for x in pop])
@@ -9,7 +9,7 @@ def evolucaoDiferencial(fObj, bounds, nPop=20, genCount=1000, F=0.8, CR=0.7):
 
     print(f"Inicio | Best x: {pop[bestI]} | Best F(x): {results[bestI]}")
     
-    for gen in range(genCount):
+    for gen in range(nGen):
         trialPop = np.copy(pop)
 
         # Mutation
