@@ -15,7 +15,7 @@ print(f"Luus Jaakola -> fObj({x1[0]}): {fx1}")
 nPop=10
 nGen=100
 F=0.25
-CR=0.1
+CR=0.8
 
 x2, fx2 = evolucaoDiferencial(fObj, (750, 1000), nPop, nGen, F, CR)
 
