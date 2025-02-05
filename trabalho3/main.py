@@ -1,12 +1,13 @@
+import numpy as np
 from cadeiaMarkov import cadeiaMarkov
-from temperaturaMedia import fObj
+# from temperaturaMedia import fObj
 
-n=100
-var=0.1
+n=1000
+sig=917 * 0.01
 
-cadeia = cadeiaMarkov(fObj, [(750, 1000)], 10000, var)
+cadeia = cadeiaMarkov((750, 1000), n, sig)
 
-print(f"Cadeia Markov -> n={n} | var={var}")
+print(f"Cadeia Markov -> n={n} | sig={sig}")
 
 for e in cadeia:
-    print(f"i = {e[0]} | x = {e[1]} | fx = {e[2]}")
+    print(f"x = {e[0]} | fx = {e[1]}")

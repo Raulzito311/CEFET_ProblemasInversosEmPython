@@ -1,24 +1,31 @@
 import numpy as np
+from temperaturaMedia import pPost
 
-def cadeiaMarkov(fObj, bounds, n, var):
-    dim = len(bounds)
-
+def cadeiaMarkov(bounds, n, sig):
     cadeia = []
 
-    x = np.array([np.random.uniform(low, high) for low, high in bounds])
+    low, high = bounds
 
-    fx = fObj(x)
+    x = np.random.uniform(low, high)
 
-    cadeia.append((-1, x, fx))
+    fx = pPost(x)
+
+    cadeia.append((x, fx))
 
     for i in range(int(n)):
-        newX = x + var * (np.random.rand(dim) * 2 - 1)
-        newX = np.clip(newX, [low for low, high in bounds], [high for low, high in bounds])
+        prevX, prevFx = cadeia[i]
+        newX = np.random.normal(loc=prevX, scale=sig)
+        newFx = pPost(newX)
 
-        newFx = fObj(newX)
+        alfa = newFx / prevFx
 
-        if newFx < fx:
-            x, fx = newX, newFx
-            cadeia.append((i, x, fx))
+        u = np.log(np.random.uniform(0, 1))
+
+        print(f"newX: {newX} | newFx: {newFx} | alfa: {alfa} | u: {u}")
+
+        if (u <= alfa):
+            cadeia.append((newX, newFx))
+        else:
+            cadeia.append((prevX, prevFx))
 
     return cadeia
