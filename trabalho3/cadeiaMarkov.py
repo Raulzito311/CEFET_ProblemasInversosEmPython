@@ -17,15 +17,17 @@ def cadeiaMarkov(bounds, n, sig):
         newX = np.random.normal(loc=prevX, scale=sig)
         newFx = pPost(newX)
 
-        alfa = newFx / prevFx
+        alfa = np.exp(newFx - prevFx)
 
-        u = np.log(np.random.uniform(0, 1))
+        # u = np.log(np.random.uniform(0, 1))
+        u = np.random.uniform(0, 1)
 
-        print(f"newX: {newX} | newFx: {newFx} | alfa: {alfa} | u: {u}")
+        print(f"prevX: {prevX} | newX: {newX} | prevFx: {prevFx} | newFx: {newFx} | alfa: {alfa} | u: {u}")
 
         if (u <= alfa):
             cadeia.append((newX, newFx))
         else:
+            print("-----------------------------------------------------")
             cadeia.append((prevX, prevFx))
 
     return cadeia

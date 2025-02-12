@@ -33,21 +33,21 @@ def fObjVerossimilhanca(cp):
     soma = 0
 
     for i in range(len(expData)):
-        soma += ((tCalc[i] - expData[i]['tExp']) ** 2) / (0.07 ** 2)
+        soma += ((tCalc[i] - expData[i]['tExp']) ** 2) / (0.07)
 
     return soma
 
 def infAPriori(cp):
     mCp = 917
-    sigCp = 10 # 10 ou 0.5
+    sigCp = 0.5 # 10 ou 0.5
 
-    return np.exp(-0.5 * ((cp - mCp) ** 2) / (sigCp ** 2))
+    return -0.5 * ((cp - mCp) ** 2) / (sigCp ** 2)
 
 def fObjMap(cp):
-    return fObjVerossimilhanca(cp) + infAPriori(cp)
+    return fObjVerossimilhanca(cp) + np.exp(infAPriori(cp))
 
 def pPost(cp):
-    return -0.5 * fObjVerossimilhanca(cp) + np.log(infAPriori(cp))
+    return -0.5 * fObjVerossimilhanca(cp) + infAPriori(cp)
 
 
 # print(f"tMed: {fObj(917)}")
